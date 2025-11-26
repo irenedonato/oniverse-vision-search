@@ -5,12 +5,11 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* --- HEADER START --- */}
-      <header className="flex items-center justify-center p-6 border-b">
-        {/* Center: Oniverse Logo (Bigger) */}
+      <header className="flex items-center justify-center py-12 px-4">
         <img 
           src="/logos/oniverse-logo.png" 
           alt="Oniverse" 
-          className="h-16 w-auto object-contain" 
+          className="h-24 md:h-32 w-auto object-contain drop-shadow-sm" 
         />
       </header>
       {/* --- HEADER END --- */}
