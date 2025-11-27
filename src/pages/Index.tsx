@@ -34,9 +34,6 @@ const Index = () => {
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-foreground tracking-tight leading-[1.1]">
             Product Retriever
-            <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mt-4 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              Visual Intelligence
-            </span>
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light">
@@ -49,12 +46,6 @@ const Index = () => {
           <ImageUploader />
         </div>
 
-        <div className="mt-32 text-center space-y-4 opacity-70 hover:opacity-100 transition-all duration-500">
-          <div className="flex items-center justify-center gap-3 text-sm text-muted-foreground">
-            <Search className="h-5 w-5 text-primary" />
-            <span className="font-medium">Powered by advanced AI image recognition technology</span>
-          </div>
-        </div>
       </main>
 
       {/* --- FOOTER START --- */}
