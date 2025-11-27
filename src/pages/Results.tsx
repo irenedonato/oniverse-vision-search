@@ -102,6 +102,39 @@ const Results = () => {
           ))}
         </div>
       </div>
+
+      {/* --- FOOTER START --- */}
+      <footer className="relative mt-16 border-t border-border/50 bg-gradient-to-t from-secondary/20 to-transparent backdrop-blur-sm">
+        <div className="container mx-auto px-4 py-8">
+          {/* Loghi Oniverse e Atelier */}
+          <div className="flex items-center justify-center gap-8 md:gap-12 mb-6 animate-fade-in">
+            <img 
+              src="/logos/oniverse-logo.png" 
+              alt="Oniverse" 
+              className="h-16 md:h-20 w-auto object-contain transition-transform duration-500 hover:scale-105" 
+              style={{ filter: 'drop-shadow(0 10px 30px hsl(var(--primary) / 0.2))' }}
+            />
+            <div className="h-12 md:h-16 w-px bg-gradient-to-b from-transparent via-primary/40 to-transparent" />
+            <img 
+              src="/logos/atelier-logo.png" 
+              alt="Atelier" 
+              className="h-16 md:h-20 w-auto object-contain transition-transform duration-500 hover:scale-105" 
+              style={{ filter: 'drop-shadow(0 10px 30px hsl(var(--accent) / 0.2))' }}
+            />
+          </div>
+          
+          {/* Powered by Agile Lab */}
+          <div className="flex items-center justify-center gap-3">
+            <span className="text-sm text-muted-foreground font-medium">Powered by</span>
+            <img 
+              src="/logos/agilelab_logo.png" 
+              alt="Agile Lab" 
+              className="h-10 w-auto object-contain hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+        </div>
+      </footer>
+      {/* --- FOOTER END --- */}
     </div>
   );
 };
