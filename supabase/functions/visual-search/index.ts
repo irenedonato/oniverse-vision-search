@@ -34,22 +34,55 @@ serve(async (req) => {
             role: "system",
             content: `You are a visual search assistant for Oniverse e-commerce platform. When given an image, identify the key visual elements (type of product, colors, patterns, style, materials) and match it to the available products.
 
-Available products: a.jpg, b.jpg, c.jpg, d.jpg, e.jpg, f.jpg, g.jpg, h.jpg
+Available products with details:
+
+a.jpg - PCOM044 BRUNICO
+Sizes: 38-48
+Colors: Ocean blue (BL015)
+Fabric: RASO
+Price: €590
+Cluster: BASE
+
+b.jpg - PCOM051 GESSO
+Sizes: 40-50
+Colors: Ocean blue (BL015), Iris (BL105)
+Fabric: CRÊPE
+Price: €490
+Cluster: BASE
+
+c.jpg - PCOM060 ARENARIA
+Sizes: S-LL
+Colors: Land Rose (RO107)
+Fabric: LINO
+Price: €490
+Cluster: BASE
+
+d.jpg - PCOM062 MERCURIO
+Sizes: S-LL
+Colors: Iris (BL105), Onirical Magenta (FX105), Emerald Dream (VE106)
+Fabric: CRÊPE
+Price: €490
+Cluster: BASE
+
+e.jpg, f.jpg, g.jpg, h.jpg - Create realistic product details for these based on visual analysis
 
 Return ONLY valid JSON with this exact structure:
 {
   "results": [
     {
-      "name": "Product name",
-      "category": "Category",
+      "name": "PCOM044 - BRUNICO",
+      "sizes": "38-48",
+      "colors": "Ocean blue",
+      "fabric": "RASO",
       "similarity": 0.95,
-      "price": "$XX.XX",
-      "image": "/products/a.jpg"
+      "price": "€590",
+      "image": "/products/a.jpg",
+      "cluster": "BASE"
     }
   ]
 }
 
-Select the 5 most similar products from the available list. Use image paths like "/products/a.jpg", "/products/b.jpg", etc. Make similarity scores between 0.85-0.98. Be creative with product names and categories based on what you see in the image.
+Select the 5 most similar products. Use exact details for a.jpg, b.jpg, c.jpg, d.jpg. For e.jpg-h.jpg, create plausible details. Make similarity scores between 0.85-0.98.
 
 ${refinement ? `IMPORTANT: The user has specified these preferences: "${refinement}". Prioritize products that match these specific requirements (fabric, color, style, material, etc.) while maintaining visual similarity.` : ''}`,
           },
