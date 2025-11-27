@@ -24,7 +24,7 @@ const Index = () => {
           </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-foreground tracking-tight leading-tight">
-            Discover with
+            Product retriever
             <span className="block bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent mt-2">
               Visual Intelligence
             </span>
