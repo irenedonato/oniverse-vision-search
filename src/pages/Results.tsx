@@ -1,27 +1,49 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft, Search } from "lucide-react";
+import { ArrowLeft, Search, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { ProductCard } from "@/components/ProductCard";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Results = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { results, imageUrl } = location.state || {};
+  const { results: initialResults, imageUrl } = location.state || {};
+  const [results, setResults] = useState(initialResults || []);
   const [refinementText, setRefinementText] = useState("");
   const [isRefining, setIsRefining] = useState(false);
 
-  if (!results || !imageUrl) {
+  if (!results.length || !imageUrl) {
     navigate("/");
     return null;
   }
 
   const handleRefine = async () => {
-    if (!refinementText.trim()) return;
+    if (!refinementText.trim()) {
+      toast.error("Please enter refinement criteria");
+      return;
+    }
+
     setIsRefining(true);
-    // TODO: Implement text-based refinement
-    setTimeout(() => setIsRefining(false), 1000);
+    try {
+      const { data, error } = await supabase.functions.invoke("visual-search", {
+        body: { image: imageUrl, refinement: refinementText },
+      });
+
+      if (error) throw error;
+
+      if (data?.results) {
+        setResults(data.results);
+        toast.success("Search refined successfully");
+      }
+    } catch (error) {
+      console.error("Error refining search:", error);
+      toast.error("Failed to refine search");
+    } finally {
+      setIsRefining(false);
+    }
   };
 
   return (
@@ -56,18 +78,20 @@ const Results = () => {
         <div className="mb-8">
           <div className="flex gap-2 max-w-2xl mx-auto">
             <Input
-              placeholder="Refine by fabric, color, or style..."
+              placeholder="e.g., cotton fabric, red color, vintage style..."
               value={refinementText}
               onChange={(e) => setRefinementText(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleRefine()}
+              onKeyDown={(e) => e.key === "Enter" && !isRefining && handleRefine()}
               className="flex-1 h-12 rounded-xl border-2 focus-visible:ring-primary"
+              disabled={isRefining}
             />
             <Button
               onClick={handleRefine}
               disabled={isRefining || !refinementText.trim()}
-              className="h-12 px-6 rounded-xl bg-primary hover:bg-primary/90 transition-all"
+              className="h-12 px-6 rounded-xl bg-primary hover:bg-primary/90 transition-all gap-2"
             >
-              <Search className="h-5 w-5" />
+              <Sparkles className="h-5 w-5" />
+              {isRefining ? "Refining..." : "Refine"}
             </Button>
           </div>
         </div>

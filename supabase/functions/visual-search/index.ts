@@ -11,7 +11,7 @@ serve(async (req) => {
   }
 
   try {
-    const { image } = await req.json();
+    const { image, refinement } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
 
     if (!LOVABLE_API_KEY) {
@@ -49,7 +49,9 @@ Return ONLY valid JSON with this exact structure:
   ]
 }
 
-Select the 5 most similar products from the available list. Use image paths like "/products/a.jpg", "/products/b.jpg", etc. Make similarity scores between 0.85-0.98. Be creative with product names and categories based on what you see in the image.`,
+Select the 5 most similar products from the available list. Use image paths like "/products/a.jpg", "/products/b.jpg", etc. Make similarity scores between 0.85-0.98. Be creative with product names and categories based on what you see in the image.
+
+${refinement ? `IMPORTANT: The user has specified these preferences: "${refinement}". Prioritize products that match these specific requirements (fabric, color, style, material, etc.) while maintaining visual similarity.` : ''}`,
           },
           {
             role: "user",
