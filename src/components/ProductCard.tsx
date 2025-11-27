@@ -7,6 +7,10 @@ interface ProductCardProps {
     similarity: number;
     price?: string;
     category?: string;
+    sizes?: string;
+    colors?: string;
+    fabric?: string;
+    cluster?: string;
   };
 }
 
@@ -20,18 +24,35 @@ export const ProductCard = ({ item }: ProductCardProps) => {
           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
         />
       </div>
-      <div className="p-4 space-y-2">
+      <div className="p-4 space-y-3">
         <h3 className="font-serif font-semibold text-lg text-card-foreground line-clamp-2">
           {item.name}
         </h3>
-        {item.category && (
-          <p className="text-xs text-muted-foreground uppercase tracking-wider">
-            {item.category}
-          </p>
-        )}
-        <div className="flex items-center justify-between pt-2">
+        
+        <div className="space-y-1.5 text-sm">
+          {item.sizes && (
+            <div className="flex items-center gap-2">
+              <span className="text-muted-foreground">Taglie:</span>
+              <span className="font-medium text-foreground">{item.sizes}</span>
+            </div>
+          )}
+          {item.colors && (
+            <div className="flex items-center gap-2">
+              <span className="text-muted-foreground">Colori:</span>
+              <span className="font-medium text-foreground">{item.colors}</span>
+            </div>
+          )}
+          {item.fabric && (
+            <div className="flex items-center gap-2">
+              <span className="text-muted-foreground">Tessuto:</span>
+              <span className="font-medium text-foreground uppercase">{item.fabric}</span>
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center justify-between pt-2 border-t border-border/50">
           {item.price && (
-            <span className="text-lg font-semibold text-primary">
+            <span className="text-xl font-semibold text-primary">
               {item.price}
             </span>
           )}
