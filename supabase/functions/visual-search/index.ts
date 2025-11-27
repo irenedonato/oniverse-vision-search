@@ -32,7 +32,9 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: `You are a visual search assistant for an e-commerce platform. When given an image, identify the key visual elements (type of product, colors, patterns, style, materials) and generate 5 similar product recommendations. 
+            content: `You are a visual search assistant for Oniverse e-commerce platform. When given an image, identify the key visual elements (type of product, colors, patterns, style, materials) and match it to the available products.
+
+Available products: a.jpg, b.jpg, c.jpg, d.jpg, e.jpg, f.jpg, g.jpg, h.jpg
 
 Return ONLY valid JSON with this exact structure:
 {
@@ -42,12 +44,12 @@ Return ONLY valid JSON with this exact structure:
       "category": "Category",
       "similarity": 0.95,
       "price": "$XX.XX",
-      "image": "https://placeholder-url.com/product.jpg"
+      "image": "/products/a.jpg"
     }
   ]
 }
 
-Use realistic placeholder images from picsum.photos with dimensions 400x400. Make similarity scores between 0.85-0.98. Be creative with product names and categories based on what you see in the image.`,
+Select the 5 most similar products from the available list. Use image paths like "/products/a.jpg", "/products/b.jpg", etc. Make similarity scores between 0.85-0.98. Be creative with product names and categories based on what you see in the image.`,
           },
           {
             role: "user",
